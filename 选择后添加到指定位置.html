@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul li{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+            float:left;
+            list-style-type: none;
+        }
+        .add,.del{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="divBind">
+    <ul id="ulBind">
+    </ul>
+</div>
+<div style="clear:both;"></div>
+<hr/>
+<div id="divType">
+    <ul>
+        <li>类型01<span class="add">+</span></li>
+        <li>类型02<span class="add">+</span></li>
+        <li>类型03<span class="add">+</span></li>
+        <li>类型04<span class="add">+</span></li>
+        <li>类型05<span class="add">+</span></li>
+    </ul>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript">
+    var liArr = [];
+    window.onload=function(){
+        $("#divType").on("click",".add",function(){
+            var newLi = $(this).parent().clone(true);
+            newLi.find("span.add").text("-");
+            newLi.find("span.add").removeClass("add").addClass("del");
+            console.log(newLi[0]);
+            $("#ulBind").append(newLi[0]);
+            liArr.push(newLi[0]);
+        });
+        $("#ulBind").on("click",".del",function() {
+            var currentLi =  $(this).parent();
+            for(var i=0;liArr.length;i++){
+                if(liArr[i]==currentLi[0]){
+                    liArr.splice(i,1);
+                    currentLi.remove();
+                    break; //跳出循环
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
